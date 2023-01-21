@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book List App</title>
+    <link href="./styles/styles.css" rel="stylesheet">
+    <link href="./styles/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+</head>
+<body>
+
+    <!-- header -->
+    <div class="container mt-4 " id="header">
+        <i class="ri-arrow-right-s-line hideContainer" id="arrow"></i>
+        <div style="display:inline-block;" id="header-title">
+            <h1 class="display-4">
+                <i class="ri-book-open-line text-primary-color"
+                onmouseover="this.className='ri-book-open-fill text-primary-color'"
+                onmouseleave="this.className='ri-book-open-line text-primary-color'" onclick="refreshToken()"></i> My <span class="primary-color text-primary-color"> Book </span> List
+            </h1>
+        </div>
+        
+
+        <div class="mt-4"id="infoContainer" style="display:inline-block; float:right">
+            <a type="button" id="btnRolePlaceholder">
+                <b><span id="rolePlaceholder" class="primary-color"></span></b>
+            </a>
+            Logged in as, <b><span id="usernamePlaceholder" class="primary-color text-primary-color"></span></b>
+            <button id="btnLogOut" type="button" style="text-decoration:none" class="btn btn-link btn-edit-users">Log Out</button>
+        </div>
+    </div>
+
+    <!-- register/login form -->
+    <div class="mt-5 authorisationContainer" id="authorisationContainer">
+        <div class="mt-5 authorisationChild">
+            <form name="authenticationForm" action="" class="" id="authenthification" >
+
+                <div id="inputFields">
+                    <div class="form-group">
+                        <input type="text" id="user" class="form-control-sm " placeholder="Username*">
+                    </div>
+                    <div class="form-group" >
+                        <input type="password" id="pass" class="form-control-sm" placeholder="Password*">
+                    </div>
+                </div>
+
+                <div class="mt-4" style="text-align:center;justify-content: center;" id="inputFieldsButtons">
+
+                    <div style=" display:block;margin-left: auto;" >
+                        <button  type="submit" class="btn btn-primary btn-add-book" id="btnLogIn">Log In</button>
+                    </div>
+
+                    <div style=" display:block; margin-left: auto;">
+                        <button  id="btnSignUp" type="button" class="btn btn-link">Sign Up</button>
+                    </div>
+
+                    <!-- <button class="btn btn-primary btn-add-book" id="btnRegister" >Register</button> -->
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- data -->
+    <div class="container mt-4" id="booksListContainer">
+        <form action="" class="" id="book-form">
+            <div class="form-group">
+                <label for="author">Title</label>
+                <input type="text" id="title" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="author">Author</label>
+                <input type="text" id="author" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="author">ISBN</label>
+                <input type="text" id="isbn" class="form-control">
+            </div>
+            <div class="mt-4">
+                <button type="submit" class="btn btn-primary btn-add-book" id="btnBookList">BookListDB</button>
+                <button type="submit" class="btn btn-primary btn-add-book" id="btnAddBook">Add Book</button>
+                <button class="btn btn-primary btn-export" id="btnExport" >Export</button>
+                <button class="btn btn-primary btn-export" id="btnImport" title="NOT IMPLEMENTED YET" >Import</button>
+                <input type="file" id="fileChosen">
+            </div>
+        </form>
+        
+        <table class="table table-dark table-bordered table-hover table-responsive mt-4">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Status</th>
+                    <th>ISBN</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="book-list">
+
+            </tbody>
+        </table>
+
+        <div class="mt-4">
+            <div class="mt-5 mb-5">
+                <a href="https://www.youtube.com/watch?v=SiBw7os-_zI" class="primary-text">OOP Concepts</a></br>
+                <a href="https://www.youtube.com/watch?v=vDJpGenyHaA&t=13s" class="primary-text">OOP Crash Course</a></br>
+                <a href="https://www.youtube.com/watch?v=2ZphE5HcQPQ" class="primary-text">JS Classes</a></br>
+                <a href="https://www.youtube.com/watch?v=JaMCxVWtW58" class="primary-text">Initial tutorial</a><br>
+                <a href="https://codepen.io/diyifang/pen/mXdQmB" class="primary-text">Example of final result</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="usersContainer" class="hideContainer">
+        <div class="container mt-4" id="usersListContainer">
+            <table class="table table-dark table-bordered table-hover table-responsive mt-4">
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>Role</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="users-list">
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <script src="./scripts/validations.js"></script>
+    <script src="./scripts/usefulFunctions.js"></script>
+    <script src="./scripts/Cookie.js"></script>
+    <script src="./scripts/API.js"></script>
+    <script src="./scripts/Storage.js"></script>
+    <script src="./scripts/views-controller/Book.js"></script>
+    <script src="./scripts/UI.js"></script>
+    <script src="./scripts/authentication.js"></script>
+    <script src="./scripts/main.js"></script>
+    <script src="./scripts/views-controller/User.js"></script>
+    <script src="./scripts/views-controller/books_section.js"></script>
+    <script src="./scripts/views-controller/users_section.js"></script>
+</body>
+</html>
