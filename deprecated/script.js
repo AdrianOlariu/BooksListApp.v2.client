@@ -1,29 +1,5 @@
-console.log("book app");
-
-// const inputFields = document.querySelector('#inputFields');
-// const confirmPassword = document.createElement('div');
-// const emailAddress = document.createElement('div');
-// const btnLogIn = document.querySelector('#btnLogIn');
-// const btnSignUp = document.querySelector('#btnSignUp');
 let role = '', token = '', username = '';
 
-btnSignUp.addEventListener('click', async (err)=>{
-    UI.signUpForm();
-    const btnRegister = document.querySelector('#btnRegister');
-    btnRegister.addEventListener('click', async (e) =>{
-
-        e.preventDefault();
-        console.log("register");
-        registerStatus = await API.register().then(result => result);
-        console.log(registerStatus.success);
-        if(registerStatus.success){
-            UI.showAlert(registerStatus.success,'success');
-        }else{
-            UI.showAlert('user has not been created','danger');
-        }
-        UI.logInForm();
-    })
-})
 //book class: represents a book -> everytime we create a book it will instantiate a book object
 
 //ui class: Handles the UI Tasks
@@ -63,19 +39,7 @@ const infoContainer = document.querySelector('#infoContainer');
 const usernamePlaceholder = document.querySelector('#usernamePlaceholder');
 const rolePlaceholder = document.querySelector('#rolePlaceholder');
 // booksContainer.parentNode.removeChild(booksContainer);
-const btnLogOut = document.querySelector('#btnLogOut');
 
-
-
-btnLogOut.addEventListener('click', async (e)=>{
-    e.preventDefault();
-    console.log('logOut');
-    await apiConnection.logOut();
-})
-
-let loggedInInfos = '';
-let apiConnection = new API('');
-let myCookie = new Cookie();
 console.log(myCookie);
 UI.loggedIn(myCookie.getCookie());
 if(document.cookie){
@@ -91,43 +55,6 @@ if(document.cookie){
     usernamePlaceholder.innerHTML = username;
     rolePlaceholder.innerHTML = `[${role.toUpperCase()}]`;
 }
-
-
-
-btnLogIn.addEventListener('click', async (e) =>{
-    e.preventDefault();
-    const username = document.querySelector('#user').value;
-    if(!username || !document.querySelector('#pass').value){
-        UI.showAlert('Insert Username and Password', 'warning');
-        console.log('insert correct value');
-    }else{
-        console.log("log in");
-        loggedInInfos = await API.logIn().then(result => {
-            myCookie.setCookie('username',username,1);
-        myCookie.setCookie('token',result.accessToken,1);
-        myCookie.setCookie('role',result.role,1);
-        // usernamePlaceholder.innerHTML = username;
-    rolePlaceholder.innerHTML = `[${result.role.toUpperCase()}]`;
-            return result});
-            console.log(loggedInInfos)
-        console.log(loggedInInfos.accessToken)
-        UI.loggedIn(loggedInInfos.accessToken, myCookie.getCookie());
-        apiConnection.setBearer(loggedInInfos.accessToken);
-        console.log('bearer',apiConnection.getBearer());
-        
-        usernamePlaceholder.innerHTML = username;
-        console.log(username);
-        myCookie.setCookie('username',username,1);
-        myCookie.setCookie('token',loggedInInfos.accessToken,1);
-        myCookie.setCookie('role',loggedInInfos.role,1);
-        UI.showAlert(`Welcome, ${username}`,'info');
-    }
-
-    // authorisationContainer.remove();
-})
-
-console.log('cookie',document.cookie);
-
 
 
 
@@ -232,10 +159,6 @@ document.querySelector('#book-list').addEventListener('click', e =>{
         // console.log('cancel');
         UI.saveEdit(e.target);
     }
-
-
-    
-    // console.log('target',e.target.parentElement.previousElementSibling.textContent);
 });
 
 Storage.testStorage();

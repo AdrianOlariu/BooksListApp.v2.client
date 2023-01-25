@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Book List App</title>
+    <title>MyBookList</title>
     <link href="./styles/styles.css" rel="stylesheet">
     <link href="./styles/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
@@ -27,7 +27,7 @@
             <a type="button" id="btnRolePlaceholder">
                 <b><span id="rolePlaceholder" class="primary-color"></span></b>
             </a>
-            Logged in as, <b><span id="usernamePlaceholder" class="primary-color text-primary-color"></span></b>
+            Logged in as, <a class="link-username" type="button" class=""><b><span id="usernamePlaceholder" class="primary-color text-primary-color button-username"></span></b></a>
             <button id="btnLogOut" type="button" style="text-decoration:none" class="btn btn-link btn-edit-users">Log Out</button>
         </div>
     </div>
@@ -62,8 +62,30 @@
         </div>
     </div>
 
-    <!-- data -->
+    <!-- profile page -->
+    <!-- <div class="container mt-4" id="profile">
+        <div class="card text-white bg-primary mb-3" style="max-width: 100%">
+        <h3 class="card-header">Profile Dashboard</h3>
+
+        </div>
+    </div> -->
+
+    <!-- booksContainer -->
     <div class="container mt-4" id="booksListContainer">
+        <table class="table table-dark table-bordered table-hover table-responsive mt-4">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Status</th>
+                    <th>ISBN</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="book-list">
+    
+            </tbody>
+        </table>
         <form action="" class="" id="book-form">
             <div class="form-group">
                 <label for="author">Title</label>
@@ -78,46 +100,24 @@
                 <input type="text" id="isbn" class="form-control">
             </div>
             <div class="mt-4">
-                <button type="submit" class="btn btn-primary btn-add-book" id="btnBookList">BookListDB</button>
+                <button type="submit" class="btn btn-primary btn-add-book hideContainer" id="btnBookList">BookListDB</button>
                 <button type="submit" class="btn btn-primary btn-add-book" id="btnAddBook">Add Book</button>
                 <button class="btn btn-primary btn-export" id="btnExport" >Export</button>
                 <button class="btn btn-primary btn-export" id="btnImport" title="NOT IMPLEMENTED YET" >Import</button>
                 <input type="file" id="fileChosen">
             </div>
         </form>
-        
-        <table class="table table-dark table-bordered table-hover table-responsive mt-4">
-            <thead>
-                <tr>
-                    <th>Title</th>
-                    <th>Author</th>
-                    <th>Status</th>
-                    <th>ISBN</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody id="book-list">
-
-            </tbody>
-        </table>
-
-        <div class="mt-4">
-            <div class="mt-5 mb-5">
-                <a href="https://www.youtube.com/watch?v=SiBw7os-_zI" class="primary-text">OOP Concepts</a></br>
-                <a href="https://www.youtube.com/watch?v=vDJpGenyHaA&t=13s" class="primary-text">OOP Crash Course</a></br>
-                <a href="https://www.youtube.com/watch?v=2ZphE5HcQPQ" class="primary-text">JS Classes</a></br>
-                <a href="https://www.youtube.com/watch?v=JaMCxVWtW58" class="primary-text">Initial tutorial</a><br>
-                <a href="https://codepen.io/diyifang/pen/mXdQmB" class="primary-text">Example of final result</a>
-            </div>
-        </div>
     </div>
 
+    <!-- usersContainer -->
     <div id="usersContainer" class="hideContainer">
         <div class="container mt-4" id="usersListContainer">
             <table class="table table-dark table-bordered table-hover table-responsive mt-4">
                 <thead>
                     <tr>
                         <th>Username</th>
+                        <th>Email</th>
+                        <th>Phone</th>
                         <th>Role</th>
                         <th>Actions</th>
                     </tr>
@@ -129,8 +129,8 @@
         </div>
     </div>
     
+    <script src="./scripts/global.js"></script>
     <script src="./scripts/validations.js"></script>
-    <script src="./scripts/usefulFunctions.js"></script>
     <script src="./scripts/Cookie.js"></script>
     <script src="./scripts/API.js"></script>
     <script src="./scripts/Storage.js"></script>
@@ -141,5 +141,14 @@
     <script src="./scripts/views-controller/User.js"></script>
     <script src="./scripts/views-controller/books_section.js"></script>
     <script src="./scripts/views-controller/users_section.js"></script>
+    <!-- <div class="mt-4">
+            <div class="mt-5 mb-5">
+                <a href="https://www.youtube.com/watch?v=SiBw7os-_zI" class="primary-text">OOP Concepts</a></br>
+                <a href="https://www.youtube.com/watch?v=vDJpGenyHaA&t=13s" class="primary-text">OOP Crash Course</a></br>
+                <a href="https://www.youtube.com/watch?v=2ZphE5HcQPQ" class="primary-text">JS Classes</a></br>
+                <a href="https://www.youtube.com/watch?v=JaMCxVWtW58" class="primary-text">Initial tutorial</a><br>
+                <a href="https://codepen.io/diyifang/pen/mXdQmB" class="primary-text">Example of final result</a>
+            </div>
+        </div> -->
 </body>
 </html>

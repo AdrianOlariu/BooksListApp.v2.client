@@ -178,6 +178,40 @@ class UI{
         }, duration ? duration : 2000)
     }
 
+    static showProgressBar(duration = 2000, progress = 60){
+        /*
+        
+        */
+        //creem un div, dinamic
+        const divParentProgress = document.createElement('div');
+        divParentProgress.setAttribute('id',`progressBar`);
+
+        //adaugam clasele la acel div, dinamic
+        divParentProgress.className = `progress`;
+        //creem un node de tip text
+        const divChildProgress = document.createElement('div');
+        divChildProgress.className = `progress-bar progress-bar-striped progress-bar-animated`;
+
+        divChildProgress.setAttribute('style',`width:${progress}%;`);
+        
+        divChildProgress.setAttribute('role','progressbar');
+        divChildProgress.setAttribute('aria-valuenow','75');
+        divChildProgress.setAttribute('aria-valuemin','25');
+        divChildProgress.setAttribute('aria-valuemax','100');
+
+        divParentProgress.appendChild(divChildProgress);
+
+        //selectam unde vom pune div-ul
+        const header = document.querySelector('#header');
+        
+        header.append(divParentProgress);
+
+        setTimeout(() => {
+            header.removeChild(divParentProgress);
+        }, duration ? duration : 2000);
+        
+    }
+
     static loggedIn(cookie){
         if(!cookie){
             // btnRegister.classList.add('hideContainer');
@@ -204,7 +238,7 @@ class UI{
         
 
         this.emailAddress.setAttribute('class','form-group');
-        this.emailAddress.innerHTML = `<input type="text" name="emailAddress" id="emailAddress" class="form-control-sm" placeholder="Email Address*">`;
+        this.emailAddress.innerHTML = `<input type="text" id="emailAddress" class="form-control-sm" placeholder="Email Address*">`;
         this.inputFields.append(this.emailAddress);
 
         this.phoneNumber.setAttribute('class','form-group');
@@ -217,11 +251,11 @@ class UI{
     
         <div>
           <input type="radio" id="radioButtonEmail" name="desiredActivationMethod" value="email" checked>
-          <label for="dewey">Email</label>
+          <label>Email</label>
         </div>
         <div>
           <input type="radio" id="radioButtonPhone" name="desiredActivationMethod" value="phone" >
-          <label for="huey">Phone</label>
+          <label>Phone</label>
         </div>
     
     </fieldset>`;
@@ -232,12 +266,13 @@ class UI{
         
         this.registerButton.setAttribute('style','display:block;margin-left: auto;');
         this.registerButton.setAttribute('class','mt-4');
+        //onclick="
+        // validateEmail(document.querySelector('#emailAddress').value);
+        // validatePassword(document.querySelector('#pass').value);
+        // validatePhoneNumber(document.querySelector('#phoneNumber').value);
+        // "
         this.registerButton.innerHTML = `<button class="btn btn-primary btn-add-book" id="btnRegister" 
-        onclick="
-        ValidateEmail(document.querySelector('#emailAddress').value);
-        validatePassword(document.querySelector('#pass').value);
-        validatePhoneNumber(document.querySelector('#phoneNumber').value);
-        ">Register</button><br>
+        >Register</button><br>
         <button  id="btnBackToLogIn" onclick="UI.logInForm();" type="button" class="btn btn-link">Back to Logi in</button>`;
         this.inputFieldsButtons.append(this.registerButton);
 
@@ -282,8 +317,10 @@ class UI{
         const html = result.map(res => `
         <tr>
             <td>${res.username}</td>
+            <td>${res.email}</td>
+            <td>${res.phoneNumber ? res.phoneNumber : "" }</td>
             <td>
-            ${res.roles[res.roles.length - 1]}
+            ${Object.getOwnPropertyNames(res.roles)[Object.values(res.roles).indexOf(Math.max(...Object.values(res.roles)))]}
             </td>
             <td class="text-center">
             <button type="button" class="btn btn-primary btn-sm btn-delete">Delete
@@ -291,7 +328,6 @@ class UI{
             </td>
         </tr>
         ` ).join('');
-        console.log(html);
         //to be added
         // </button><button class="btn btn-primary btn-sm btn-edit">Edit</button>
 

@@ -5,37 +5,29 @@ function isNumberKey(evt){
     return true;
 }
 
-function ValidateEmail(inputText)
-{
+function validateEmail(inputText){
     console.log('validate email input text', inputText);
     var validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
     if (inputText.match(validRegex)) {
         return true;
-    
     } else {
-    
-    UI.showAlert('Email Address format invalid!','danger');
-    
-    return false;
-    
+        UI.showAlert('Email Address format invalid!','danger');
+        return false;
     }
 }
 
 function validatePhoneNumber(phone){
-    const desiredActivationMethod = document.querySelector('input[name="desiredActivationMethod"]:checked').value;
-    console.log('validationMethod', desiredActivationMethod)
-    if(desiredActivationMethod === 'phone' || phone != ''){
+    // const desiredActivationMethod = document.querySelector('input[name="desiredActivationMethod"]:checked').value;
+    // console.log('validationMethod', desiredActivationMethod)
+    // if(desiredActivationMethod === 'phone' || phone != ''){
         console.log(phone.length);
-        if(((phone.length != 10) || ((phone[0] != '4') && phone[0] != '0')) ){
-            
+        if(((phone.length != 10) || (phone[0] != '0')) ){
             UI.showAlert('Phone number format invalid!','danger');
+            return false;
         }else{
-            return;
+            return true;
         }
-    }else{
-        console.log('no phone number validation required');
-    }
 }
 
 function validatePassword(password){

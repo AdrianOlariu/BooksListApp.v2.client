@@ -2,6 +2,10 @@ body{
     /* background-color:rgb(255, 248, 234)!important; */
 }
 
+#booksListContainer{
+    margin-bottom: 2em;
+}
+
 .text-primary-color{
     color:rgb(255, 141, 2)!important;
 }
@@ -112,4 +116,14 @@ body{
     position:relative;
     animation-name: header-move;
     animation-duration: 5s;
+}
+
+
+.button-username:hover{
+    cursor:pointer;
+    color:rgb(3, 182, 161)!important;
+}
+
+.link-username{
+    text-decoration: none!important;
 }

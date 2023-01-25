@@ -14,17 +14,23 @@ class API{
 
     static async logIn(user, pass){
         if(user !== '' && pass !== ''){
-            return await fetch(
-                'http://localhost:3500/users/login',{
+            const response = await fetch(
+                appSettings.url + '/users/login',{
                     method: 'POST',
                     headers: {'Content-Type':'application/json'},
                     credentials: 'include',
                     body: JSON.stringify({username:user, password:pass})
                 }
             );
+            const data = await response.json();
+            if(response.ok){
+                return data;
+            }else{
+                UI.showAlert(data.message,'danger', 8000);
+                return 0;
+            }
         }else{
-            console.log('User and Password required');
-            UI.showAlert(`User and Password required`,'danger');
+            return 0;
         }
     }
 
@@ -37,78 +43,77 @@ class API{
             desiredActivationMethod:desiredActivationMethod
         });
         if(user !== '' && pass !== '' && (pass === confirmPass) && (emailAddress != '' || phoneNumber != '')){
-                return fetch('http://localhost:3500/users/register',{
-                    method: 'POST',
-                    headers: {'Content-Type':'application/json'},
-                    credentials: 'include',
-                    body: JSON.stringify({
-                        username:user,
-                        password:pass,
-                        emailAddress:emailAddress,
-                        phoneNumber:phoneNumber,
-                        desiredActivationMethod:desiredActivationMethod })
-                    }).then(response => response);
-                    // return await response.json();
+            const response = await fetch(appSettings.url + '/users/register',{
+                method: 'POST',
+                headers: {'Content-Type':'application/json'},
+                credentials: 'include',
+                body: JSON.stringify({
+                    username:user,
+                    password:pass,
+                    emailAddress:emailAddress,
+                    phoneNumber:phoneNumber,
+                    desiredActivationMethod:desiredActivationMethod })
+                });
+                const data = await response.json();
+            if(response.ok){
+                return data;
+            }else{
+                UI.showAlert(data.message,'danger', 8000);
+                return 0;
+            }
         }else{
-            console.log('User and Password required');
-            UI.showAlert(`User and Password required`,'danger');
+            return 0;
         }
     }
 
-    async books(url, method, accessToken){
+    async getMyBooksList(){
                 //https://internationaltradeadministration.github.io/DevPortalMessages/IntroToNewAuthType.html
-                let finalUrl = 'http://api2.adrianolariu.ro/books';
-                const token = 'Bearer ' + this.bearer;
-                console.log('async function');
-                console.log(`${finalUrl}`);
-                    console.log(token);
-                try{
-                    
-                    const response = await fetch(
-                        finalUrl,{
-                            method: method,
-                            headers: {
-                                'Authorization': token
-                            }
+                //the bearer is set through the setBearer method inside the logIn function in autenthication.
+                console.log(token);
+                const response = await fetch(appSettings.url + '/books'  ,{
+                        method: 'GET',
+                        headers: {
+                            'Authorization': 'Bearer ' + this.bearer
                         }
-                    )
-    
-                    if(response.ok){
-                        return await response.json();
-                    }else{
-                        throw new Error(`${response.status} ${response.statusText}`);
                     }
-                }catch (err){
-                    console.log('caught error',err);
+                )
+                const data = await response.json();
+                if(response.ok){
+                    return data;
+                }else{
+                    UI.showAlert(data.message,'danger', 8000);
+                    return 0;
                 }
     }
 
     async refreshToken(){
-                try{
-                    const response = await fetch('http://api2.adrianolariu.ro/refreshtoken',
-                    {
-                            method: 'GET',
-                            credentials: 'include'
-                            // headers: {
-                            //     'Authorization': token
-                            // }
-                            //cookie-ul este pus automat in header. La server luam cookie.jwt
-                        }
-                    )
-    
-                    if(response.ok){
-                        return await response.json();
-                    }else{
-                        throw new Error(`${response.status} ${response.statusText}`);
+                const response = await fetch(appSettings.url + '/users/refreshtoken',{
+                        method: 'GET',
+                        credentials: 'include',
+                        // headers: {
+                        //     'Authorization': 'Bearer ' + this.bearer
+                        // }
+                        //folosim jwtRefreshToken, primit in httpOnly cookie
+                        //cookie-ul este pus automat in header
+                        //La server luam cookie.jwtRefreshToken
+                        //aceasta functie da refresh in baza de date la accessToken pe care il folosim in aplicatie
+                        //reinitializam accessToken-ul
                     }
-                }catch (err){
-                    console.log('caught error',err);
+                )
+
+                if(response.ok){
+                    const data = await response.json();
+                    console.log(data);
+                    return data;
+                }else{
+                    return 0;
                 }
+               
     }
 
     async logOut(){
         try{
-            const response = await fetch('http://api2.adrianolariu.ro/users/logout',
+            const response = await fetch(url + '/users/logout',
             {
                     method: 'GET',
                     credentials: 'include'
@@ -131,17 +136,18 @@ class API{
     }
 
     async getUsers(){
-        
-        try{
-            const response = await fetch('http://api2.adrianolariu.ro/users',{
-                method:'GET',
-                headers: {
-                    Authorization: 'Bearer ' + this.bearer
-                }
-            });
-            return await response.json();
-        }catch(err){
-            console.log(err);
+    
+        const response = await fetch(appSettings.url + '/users',{
+            method:'GET',
+            headers: {
+                Authorization: 'Bearer ' + this.bearer
+            }
+        });
+        const data = await response.json();
+        if(response.ok){
+            return data;
+        }else{
+            return 0;
         }
     }
 
@@ -149,7 +155,7 @@ class API{
         console.log(userName);
         try{
             const response = await fetch(
-                'http://api2.adrianolariu.ro/users/',
+                url + '/users/',
                 {
                     method:'DELETE',
                     headers: {
@@ -167,7 +173,7 @@ class API{
 
     async verifyAccessToken(){
         try{
-            const response = await fetch('http://api2.adrianolariu.ro/verifyaccesstoken',{method: 'GET'});
+            const response = await fetch(url + '/verifyaccesstoken',{method: 'GET'});
         }catch (err){
 
         }

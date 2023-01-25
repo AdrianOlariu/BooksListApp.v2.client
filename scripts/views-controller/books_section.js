@@ -5,7 +5,6 @@
 //store class: handles Storage - localSotrage withing the browser
 
 //Events: Display Books, Add a Book, Remove a Book
-let books;
 
 const btnImport = document.querySelector('#btnImport');
 btnImport.addEventListener('click', (event) =>{
@@ -35,10 +34,9 @@ btnBookList.addEventListener('click', async (e) =>{
 
     e.preventDefault();
     console.log("book list");
-    books = await apiConnection.books('','GET').then(result => result);
-    console.log(books);
-    UI.importBooks(JSON.stringify(books));
-})
+    const myBooksList = await apiConnection.getMyBooksList();
+    UI.importBooks(JSON.stringify(myBooksList));
+});
 
 
 const btnExport = document.querySelector('#btnExport');
@@ -48,7 +46,7 @@ btnExport.addEventListener( 'click' , (e) =>{
     if(!(retVal === null)){
         Storage.download(`${retVal}.json`, Storage.getBooks());
     }
-})
+});
 
 const btnAddBook = document.querySelector('#btnAddBook');
 btnAddBook.addEventListener('click', async (e)=>{

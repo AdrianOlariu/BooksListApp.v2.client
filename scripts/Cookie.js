@@ -11,10 +11,10 @@ class Cookie {
         }
     }
 
-    setCookie(cname, cvalue, hours, minsorhours){
+    setCookie(cname, cvalue, hours, minutes){
         if(cvalue){
             const d = new Date();
-            d.setTime(d.getTime() + ((minsorhours ? minsorhours : hours*60) *60*1000));
+            d.setTime(d.getTime() + ((minutes ? minutes : hours*60) *60*1000));
             let expires = "expires="+ d.toUTCString();
             document.cookie = cname + "=" + cvalue + ";" + expires + ";";
         }
