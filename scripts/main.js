@@ -16,7 +16,7 @@ let loggedIn = false;
 if(myCookie.getCookieByName('token') || myCookie.getCookieByName('username')){
     console.log();
     loggedIn = true;
-    UI.animationHeader('When the authentication token expires, refresh it by clicking the book icon!', animationPlayed, allowedPlayableAnimations);
+    // UI.animationHeader('When the authentication token expires, refresh it by clicking the book icon!', animationPlayed, allowedPlayableAnimations);
     animationPlayed += 1;
 }else{
     tokenExpired = true;
@@ -35,7 +35,7 @@ const usersContainer = document.querySelector('#usersContainer')
 btnRolePlaceholder.addEventListener('click', async (e)=>{
     e.preventDefault();
     if(myCookie.getCookieByName('token')){
-        UI.animationHeader('Go back to the book list, by clicking the book icon!', animationPlayed, allowedPlayableAnimations);
+        // UI.animationHeader('Go back to the book list, by clicking the book icon!', animationPlayed, allowedPlayableAnimations);
         animationPlayed += 1;
         section = 'users';
 
@@ -51,9 +51,9 @@ btnRolePlaceholder.addEventListener('click', async (e)=>{
     }else{
         UI.showAlert('Access token has expired! Refresh it!','danger');
         if(section === 'users'){
-            UI.animationHeader('Go back to the book list, by clicking the book icon!', 0, 1);
+            // UI.animationHeader('Go back to the book list, by clicking the book icon!', 0, 1);
         }else{
-            UI.animationHeader('When the access token expires, refresh it by clicking the book icon!', 0, 1);
+            // UI.animationHeader('When the access token expires, refresh it by clicking the book icon!', 0, 1);
         }
     }
 })

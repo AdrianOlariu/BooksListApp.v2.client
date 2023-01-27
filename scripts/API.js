@@ -151,23 +151,58 @@ class API{
         }
     }
 
-    async deleteUser(userName){
-        console.log(userName);
+    async deleteUser(username){
+        console.log(username);
         try{
             const response = await fetch(
-                url + '/users/',
+                appSettings.url + `/users/delete?username=${username}`,
                 {
                     method:'DELETE',
                     headers: {
                         'Content-Type':'application/json',
                         Authorization: 'Bearer ' + this.bearer
-                        },
-                    body: JSON.stringify({username:userName})
+                        }
                 }
             )
-            return await response.json();
+            const data = await response.json();
+            if(response.ok){
+                return data;
+            }
         }catch (err){
             console.log(err);
+        }
+    }
+
+    async updateUser(object){
+        const {username, email, phone, roles, books} = object;
+        console.log(object);
+        if(username && (email || phone || roles || books )){
+            console.log('try API CALL UPDATE USER!')
+            try{
+                const url = appSettings.url + `/users/update?username=${username}` 
+                + (email ? "&email=" + email  : "")
+                + (phone ? "&phone=" + phone  : "") 
+                + (roles ? "&roles=" + roles  : "")
+                + (books ? "&books=" + books  : "");
+                const response = await fetch(url,{ 
+                        method:"PUT", headers:{
+                        'Content-Type':'application/json',
+                        Authorization: 'Bearer ' + this.bearer}
+                    }
+                );
+                const data = await response.json();
+                console.log(data);
+                if(response.ok){
+                    return data;
+                }else{
+                    return 0;
+                }
+                
+            }catch (e){
+                console.log(e);
+            }
+        }else{
+            return false;
         }
     }
 
