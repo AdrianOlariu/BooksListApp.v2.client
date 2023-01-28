@@ -71,7 +71,75 @@
     </div> -->
 
     <!-- booksContainer -->
-    <div class="container mt-4" id="booksListContainer">
+    <div class="container mt-2" id="booksListContainer">
+        
+
+        <div >
+            <div class="row">
+                <div class="col-8">
+                    <div cstyle="float:right!!">
+                        <form action="" class="" id="book-form">
+                            <!-- <div class="form-group">
+                                <label for="author">Title</label><input type="text" id="title" class="form-control">
+                                
+                            </div>
+                            <div class="form-group">
+                                <label for="author">Author</label>
+                                <input type="text" id="author" class="form-control">
+                            </div>
+                            <div class="form-group">
+                            <label for="author">Status</label>
+                            <input type="text" id="isbn" class="form-control">
+                        </div> -->
+                        
+                    </form>
+                </div>
+            </div>
+            </div>
+            <div class="row mt-2" >
+              <div class="col-4">
+                <div class="form-group">
+                    <input type="text" placeholder="Title of the book*" id="title" class="form-control">
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="form-group">
+                    <input type="text" placeholder="Author*" id="author" class="form-control">
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="form-group">
+                    <input type="text" placeholder="Release year" id="isbn" class="form-control">
+                </div>
+              </div>
+            </div>
+
+            <div class="row" style="margin-top:2em">
+                <div class="col-12">
+                    <div class="form-group">
+                        <input type="text" placeholder="Genres (separated by comma)" id="isbn" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4 mt-4">
+                    <button type="submit" class="btn btn-primary btn-add-book hideContainer" id="btnBookList">BookListDB</button>
+                    <button type="submit" class="btn btn-primary btn-add-book" id="btnAddBook">Add Book</button>
+                </div>
+                <div class="col-8 mt-4">
+                    <label></label>
+                    <div style="float:right!important"class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                        <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
+                        <label class="btn btn-sm btn-outline-primary" for="btnradio1">Want to read</label>
+                        <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
+                        <label class="btn btn-sm btn-outline-primary" for="btnradio2">Currently reading</label>
+                        <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off">
+                        <label class="btn btn-sm btn-outline-primary" for="btnradio3">Read</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <table class="table table-dark table-bordered table-hover table-responsive mt-4">
             <thead>
                 <tr>
@@ -86,27 +154,24 @@
     
             </tbody>
         </table>
-        <form action="" class="" id="book-form">
-            <div class="form-group">
-                <label for="author">Title</label>
-                <input type="text" id="title" class="form-control">
+
+        <div class="card text-white bg-dark mb-3 mt-4" style="max-width: 100%;">
+            <div class="card-header">Save the list to your device!</div>
+            <div class="card-body">
+              <p class="card-text">You can export your book list in a JSON Format and import it anywhere you want!</p>
+              <div class="row">
+                <div class="col-4">
+                    <button class="btn btn-primary btn-export" id="btnExport" >Export list to local storage</button>
+                </div>
+                <div class="col-4">
+                    <button class="btn btn-primary btn-export" id="btnImport" title="NOT IMPLEMENTED YET" >Import list from local storage</button>
+                </div>
+                <div class="col-4">
+                    <input class="form-control" type="file" id="fileChosen">
+                </div>
             </div>
-            <div class="form-group">
-                <label for="author">Author</label>
-                <input type="text" id="author" class="form-control">
             </div>
-            <div class="form-group">
-                <label for="author">ISBN</label>
-                <input type="text" id="isbn" class="form-control">
-            </div>
-            <div class="mt-4">
-                <button type="submit" class="btn btn-primary btn-add-book hideContainer" id="btnBookList">BookListDB</button>
-                <button type="submit" class="btn btn-primary btn-add-book" id="btnAddBook">Add Book</button>
-                <button class="btn btn-primary btn-export" id="btnExport" >Export</button>
-                <button class="btn btn-primary btn-export" id="btnImport" title="NOT IMPLEMENTED YET" >Import</button>
-                <input type="file" id="fileChosen">
-            </div>
-        </form>
+          </div>
     </div>
 
     <!-- usersContainer -->

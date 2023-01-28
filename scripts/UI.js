@@ -159,11 +159,11 @@ class UI{
             children[children.length - 1].appendChild(UI.button('Edit'));
             console.log('works',children[children.length - 1]);
 
-            children[0].textContent = UI.holdUser.username;
+            // children[0].textContent = UI.holdUser.username;
             children[1].textContent = UI.holdUser.email;
             children[2].textContent = UI.holdUser.phone;
             children[3].textContent = UI.holdUser.roles;
-            children[4].textContent = UI.holdUser.books;
+            // children[4].textContent = UI.holdUser.books;
         }
 
         UI.flagEdit = false;
@@ -203,7 +203,7 @@ class UI{
         UI.holdUser.email !== children[1].textContent ? (children[1].textContent === '' ? properties["email"] = '-' : properties["email"] = children[1].textContent, UI.holdUser.email = children[1].textContent) : '';
         UI.holdUser.phone !== children[2].textContent ? (children[2].textContent === '' ? properties["phone"] = '-' : properties["phone"] = children[2].textContent, UI.holdUser.phone = children[2].textContent) : '';
         UI.holdUser.roles !== children[3].textContent ? (children[3].textContent === '' ? properties["roles"] = '-' : properties["roles"] = children[3].textContent, UI.holdUser.roles = children[3].textContent) : '';
-        UI.holdUser.books !== children[4].textContent ? (children[4].textContent === '' ? properties["books"] = '-' : properties["books"] = children[4].textContent, UI.holdUser.books = children[4].textContent) : '';
+        // UI.holdUser.books !== children[4].textContent ? (children[4].textContent === '' ? properties["books"] = '-' : properties["books"] = children[4].textContent, UI.holdUser.books = children[4].textContent) : '';
 
         console.log('save edit', UI.holdUser);
         //suprascriem field-urile din obiectul principal deoarece folosim tot metoda cancel
@@ -218,7 +218,7 @@ class UI{
         //     properties.books === '' ? properties.books = '-' : '';
         // }
 
-        if(properties.email || properties.phone|| properties.roles || properties.books){
+        if(properties.email || properties.phone|| properties.roles ){//|| properties.books
                 return properties;
         }else{
             return null;
@@ -482,13 +482,31 @@ class UI{
         // const highestRole = Object.getOwnPropertyNames(res.roles)[Object.values(res.roles).indexOf(Math.max(...Object.values(res.roles)))];
         const html = result.map(res => `
         <tr>
-            <td>${res.username}</td>
+            <td><span onclick="" style="float:left;" class="badge bg-light">${res.username}</span></td>
             <td>${res.email}</td>
             <td>${res.phoneNumber ? res.phoneNumber : "" }</td>
             <td>
                 ${Object.getOwnPropertyNames(res.roles).toString()}
             </td>
-            <td>${res.books ? res.books : "" }</td>
+            <td>
+                <div class="container">
+                ${res.books ?   (res.books.map(book=>{ return `
+
+                <div class="row" style="margin-bottom:6px">
+                        <div class="col-sm-6">                            
+                            <span onclick="" style="float:left;" class="badge bg-light">${book.author.toUpperCase()}</span>
+                        </div>
+                        <div class="col-sm-6">                            
+                            <label>${book.title}</label>
+                        </div>
+                    </div>
+
+        
+`})).join('') : "" }
+                    
+
+                </div>
+            </td>
             <td class="text-center">
                 <button type="button" class="btn btn-primary btn-sm btn-delete">Delete
                 </button><button class="btn btn-primary btn-sm btn-edit">Edit</button>
