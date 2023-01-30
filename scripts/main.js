@@ -5,7 +5,7 @@ let animations = true;
 let btnRolePlaceholder = document.querySelector('#btnRolePlaceholder');
 let role = '', token = '', username = '';
 let loggedInInfos = '';
-let apiConnection = new API('');
+let apiConnection = new API();
 let myCookie = new Cookie();
 let animationPlayed = 0;
 let allowedPlayableAnimations = 2;
@@ -128,7 +128,7 @@ async function refreshToken(){
                     if(data){
                         console.log('called');
                         myCookie.clearCookie('token');
-                        myCookie.setCookie('token', data.accessToken, 0, 1);
+                        myCookie.setCookie('token', data.accessToken, 0, 15);
                         apiConnection.setBearer(data.accessToken)
                         UI.showAlert(`New access token generated!`,'success');
                     }else{

@@ -7,6 +7,41 @@
 //Events: Display Books, Add a Book, Remove a Book
 
 const btnImport = document.querySelector('#btnImport');
+
+// console.log(readingStatus);
+
+const btnAddBook = document.querySelector('#btnAddBook');
+btnAddBook.addEventListener('click', async (e)=>{
+    e.preventDefault();
+    const username = document.querySelector('#usernamePlaceholder').value;
+    const title = document.querySelector('#title').value;
+    const author = document.querySelector('#author').value;
+    const year = document.querySelector('#year').value;
+    const genres = document.querySelector('#genres').value;
+    const readingStatus = document.querySelector('input[name="btnRadioReadingStatus"]:checked').value;
+
+    let book = new Book();
+    console.log('book1 empty:',book);
+    console.log("reading status:",readingStatus);
+    
+    // console.log(Storage.testJson);
+    if(title === '' || author === ''){
+        UI.showAlert('Please fill in all the details marked with *', 'warning');
+    }else{
+        
+        book.setBook(title, author, year ? year : '', genres ? genres.split(',') : '', readingStatus);
+
+        const addBook = await apiConnection.addBookToUserList(myCookie.getCookieByName('username'), book);
+        if(addBook){
+            UI.showAlert(`${addBook.message}`, 'success');
+            UI.clearFieldsBookAdding();
+        }
+
+        // Storage.addBook(book);
+        // UI.addBookToList(book);
+    }
+});
+
 btnImport.addEventListener('click', (event) =>{
     event.preventDefault();
 
@@ -29,6 +64,7 @@ btnImport.addEventListener('click', (event) =>{
     }
 });
 
+
 const btnBookList = document.querySelector('#btnBookList');
 btnBookList.addEventListener('click', async (e) =>{
 
@@ -45,26 +81,6 @@ btnExport.addEventListener( 'click' , (e) =>{
     var retVal = prompt("Name of the exported list: ");
     if(!(retVal === null)){
         Storage.download(`${retVal}.json`, Storage.getBooks());
-    }
-});
-
-const btnAddBook = document.querySelector('#btnAddBook');
-btnAddBook.addEventListener('click', async (e)=>{
-    e.preventDefault();
-    
-    const title = document.querySelector('#title').value;
-    const author = document.querySelector('#author').value;
-    const isbn = document.querySelector('#isbn').value;
-    console.log(Storage.testJson);
-    if(title === '' || author === '' || isbn === ''){
-        UI.showAlert('Please fill in all the details', 'warning');
-    }else{
-        let book = new Book(title, author, '', isbn);
-        Storage.addBook(book);
-        UI.showAlert('Book added', 'success');
-        console.log(book);
-        UI.addBookToList(book);
-        UI.clearFields();
     }
 });
 

@@ -109,7 +109,7 @@
               </div>
               <div class="col-4">
                 <div class="form-group">
-                    <input type="text" placeholder="Release year" id="isbn" class="form-control">
+                    <input type="text" placeholder="Release year" id="year" class="form-control">
                 </div>
               </div>
             </div>
@@ -117,7 +117,7 @@
             <div class="row" style="margin-top:2em">
                 <div class="col-12">
                     <div class="form-group">
-                        <input type="text" placeholder="Genres (separated by comma)" id="isbn" class="form-control">
+                        <input type="text" placeholder="Genres (separated by comma)" id="genres" class="form-control">
                     </div>
                 </div>
             </div>
@@ -127,14 +127,17 @@
                     <button type="submit" class="btn btn-primary btn-add-book" id="btnAddBook">Add Book</button>
                 </div>
                 <div class="col-8 mt-4">
-                    <label></label>
-                    <div style="float:right!important"class="btn-group" role="group" aria-label="Basic radio toggle button group">
-                        <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
-                        <label class="btn btn-sm btn-outline-primary" for="btnradio1">Want to read</label>
-                        <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
-                        <label class="btn btn-sm btn-outline-primary" for="btnradio2">Currently reading</label>
-                        <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off">
-                        <label class="btn btn-sm btn-outline-primary" for="btnradio3">Read</label>
+                    <div style="float:right!important"class="btn-group" aria-label="Basic radio toggle button group">
+                        <label style="margin-top: .6em; margin-right: 1em; font-size: large;">Reading status:</label>
+                        
+                        <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                            <input type="radio" class="btn-check" name="btnRadioReadingStatus" id="btnRadioReadStatus1" autocomplete="off" value="Want to read" checked>
+                            <label class="btn btn-sm btn-outline-primary" for="btnRadioReadStatus1">Want to read</label>
+                            <input type="radio" class="btn-check" name="btnRadioReadingStatus" id="btnRadioReadStatus2" autocomplete="off" value="Currently reading" >
+                            <label class="btn btn-sm btn-outline-primary" for="btnRadioReadStatus2">Currently reading</label>
+                            <input type="radio" class="btn-check" name="btnRadioReadingStatus" id="btnRadioReadStatus3" autocomplete="off" value="Read" >
+                            <label class="btn btn-sm btn-outline-primary" for="btnRadioReadStatus3">Read</label>
+                          </div>
                     </div>
                 </div>
             </div>

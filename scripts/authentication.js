@@ -72,6 +72,7 @@ btnLogIn.addEventListener('click', async (e) =>{
             UI.showAlert(`Welcome, ${logInData.username} !`,'success', 4000);
             loggedIn = true;
             const myBooksList = await apiConnection.getMyBooksList();
+            apiConnection.setUsername(logInData.username);
             
             if(myBooksList){
                 UI.importBooks(JSON.stringify(myBooksList));

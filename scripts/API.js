@@ -1,7 +1,8 @@
 class API{
 
-    constructor(bearer){
+    constructor(bearer, username){
         this.bearer = bearer;
+        this.username = username;
     }
 
     getBearer(){
@@ -10,6 +11,14 @@ class API{
 
     setBearer(bearer){
         this.bearer = bearer;
+    }
+
+    getUsername(){
+        return this.username;
+    }
+
+    setUsername(username){
+        this.username = username;
     }
 
     static async logIn(user, pass){
@@ -100,9 +109,8 @@ class API{
                         //reinitializam accessToken-ul
                     }
                 )
-
+                const data = await response.json();
                 if(response.ok){
-                    const data = await response.json();
                     console.log(data);
                     return data;
                 }else{
@@ -184,6 +192,7 @@ class API{
                 + (phone ? "&phone=" + phone  : "") 
                 + (roles ? "&roles=" + roles  : "")
                 + (books ? "&books=" + books  : "");
+                console.log(url);
                 const response = await fetch(url,{ 
                         method:"PUT", headers:{
                         'Content-Type':'application/json',
@@ -195,14 +204,35 @@ class API{
                 if(response.ok){
                     return data;
                 }else{
+                    UI.showAlert(data.message, 'warning',6000);
                     return 0;
                 }
-                
             }catch (e){
                 console.log(e);
             }
         }else{
             return false;
+        }
+    }
+
+    async addBookToUserList(username, book){
+        console.log(this.bearer);
+        const bookJSON = JSON.stringify(book);
+        console.log(bookJSON);
+        console.log(username);
+        const url = appSettings.url + `/users/book?username=${username}&book=${bookJSON}`
+        const response = await fetch(url,{
+            method:'PUT', headers:{
+            'Content-Type':'application/json',
+            Authorization: 'Bearer ' + this.bearer}
+        }
+            )
+        const data = await response.json();
+        if(response.ok){
+            return data;
+        }else{
+            UI.showAlert(data.message, 'warning', 6000);
+            return 0;
         }
     }
 

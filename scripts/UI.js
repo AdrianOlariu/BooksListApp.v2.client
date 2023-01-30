@@ -83,10 +83,14 @@ class UI{
         tbodyElemenet.appendChild(trowElement);
     }
 
-    static clearFields(){
+    static clearFieldsBookAdding(){
         document.querySelector('#title').value = '';
         document.querySelector('#author').value = '';
-        document.querySelector('#isbn').value = '';
+        document.querySelector('#year').value = '';
+        document.querySelector('#genres').value = '';
+        document.querySelector('input[name="btnRadioReadingStatus"]:checked').checked = false;
+        document.querySelector('#btnRadioReadStatus1').checked = true;
+
     }
 
     static deleteBook(element){
