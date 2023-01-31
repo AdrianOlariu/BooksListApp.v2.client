@@ -97,39 +97,38 @@
             </div>
             </div>
             <div class="row mt-2" >
-              <div class="col-4">
+              <div class="col-6">
                 <div class="form-group">
                     <input type="text" placeholder="Title of the book*" id="title" class="form-control">
                 </div>
               </div>
-              <div class="col-4">
+              <div class="col-6">
                 <div class="form-group">
                     <input type="text" placeholder="Author*" id="author" class="form-control">
                 </div>
               </div>
-              <div class="col-4">
-                <div class="form-group">
-                    <input type="text" placeholder="Release year" id="year" class="form-control">
-                </div>
-              </div>
+              
             </div>
 
             <div class="row" style="margin-top:2em">
-                <div class="col-12">
+                <div class="col-6">
+                    <div class="form-group">
+                        <input type="text" placeholder="Release year" id="year" class="form-control">
+                    </div>
+                </div>
+                <div class="col-6">
                     <div class="form-group">
                         <input type="text" placeholder="Genres (separated by comma)" id="genres" class="form-control">
                     </div>
                 </div>
             </div>
             <div class="row">
-                <div class="col-4 mt-4">
-                    <button type="submit" class="btn btn-primary btn-add-book hideContainer" id="btnBookList">BookListDB</button>
-                    <button type="submit" class="btn btn-primary btn-add-book" id="btnAddBook">Add Book</button>
-                </div>
                 <div class="col-8 mt-4">
-                    <div style="float:right!important"class="btn-group" aria-label="Basic radio toggle button group">
-                        <label style="margin-top: .6em; margin-right: 1em; font-size: large;">Reading status:</label>
-                        
+                    <div style="float:left;">
+                        <button type="submit" class="btn btn-primary btn-add-book hideContainer" id="btnBookList">BookListDB</button>
+                        <button type="submit" class="btn btn-primary btn-add-book" id="btnAddBook">Add Book</button>
+                    </div>
+                    <div style="margin-left:.6em; margin-top: .1em; float:left!important" class="btn-group" aria-label="Basic radio toggle button group">
                         <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
                             <input type="radio" class="btn-check" name="btnRadioReadingStatus" id="btnRadioReadStatus1" autocomplete="off" value="Want to read" checked>
                             <label class="btn btn-sm btn-outline-primary" for="btnRadioReadStatus1">Want to read</label>
@@ -139,6 +138,17 @@
                             <label class="btn btn-sm btn-outline-primary" for="btnRadioReadStatus3">Read</label>
                           </div>
                     </div>
+                </div>
+                <div class="col-4">
+                    <div style="margin-top: .6em; float:right!important"class="btn-group mt-4" aria-label="Basic radio toggle button group">
+                        <button type="submit" class="btn btn-primary btn-add-book" id="btnAddBook">Search</button>
+                        <input type="text" placeholder="Search by Title or Author" id="searchTitleOrAuthor" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    
                 </div>
             </div>
         </div>
